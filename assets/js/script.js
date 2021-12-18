@@ -48,6 +48,8 @@ var characterSelect = function() {
 
 // create function to generate a password based on the user input
 var generatePassword = function() {
+  characterSet = ""
+  
   // call function to collect the desired length
   var characterLength = passwordLength();
 
