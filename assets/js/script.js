@@ -1,62 +1,61 @@
-// create function to generate a password based on the user input
-var generatePassword = function() {
-  // create variable to hold our set of chosen characters
-  var characterSet = "";
+// create variable to hold our set of chosen characters
+var characterSet = "";
 
-  // call function to collect the desired length
-  passwordLength();
+// function to collect the character sets the user wants to include in the password
+var characterSelect = function() {
+  // confirm if user wants lowercase characters
+  var lowercase = window.confirm("Click OK if you want to include lowercase characters.");
 
-  // function to collect the character sets the user wants to include in the password
-  var characterSelect = function() {
-    // confirm if user wants lowercase characters
-    var lowercase = window.confirm("Click OK if you want to include lowercase characters.");
+  if (lowercase) {
+    characterSet = characterSet.concat("abcdefghijklmnopqrstuvwxyz");
+  };
 
-    if (lowercase) {
-      characterSet = characterSet.concat("abcdefghijklmnopqrstuvwxyz");
-    };
+  // confirm if user wants uppercase characters
+  var uppercase = window.confirm("Click OK if you want to include uppercase characters.");
 
-    // confirm if user wants uppercase characters
-    var uppercase = window.confirm("Click OK if you want to include uppercase characters.");
+  if (uppercase) {
+    characterSet = characterSet.concat("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+  };
 
-    if (uppercase) {
-      characterSet = characterSet.concat("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
-    };
+  // confirm if user wants numbers
+  var numberChars = window.confirm("Click OK if you want to include numbers.");
 
-    // confirm if user wants numbers
-    var numberChars = window.confirm("Click OK if you want to include numbers.");
+  if (numberChars) {
+    characterSet = characterSet.concat("0123456789");
+  };
 
-    if (numberChars) {
-      characterSet = characterSet.concat("0123456789");
-    };
+  // confirm if user wants special characters
+  var special = window.confirm("Click OK if you want to include special characters");
 
-    // confirm if user wants special characters
-    var special = window.confirm("Click OK if you want to include special characters");
+  if (special) {
+    characterSet = characterSet.concat("!#$%&()*+,-./:;<=>?@[]|^_`{}~\'\"\\");
+  };
 
-    if (special) {
-      characterSet = characterSet.concat("!#$%&()*+,-./:;<=>?@[]|^_`{}~\'\"\\");
-    };
+  // check to make sure at least one character set was selected
+  if (characterSet === "") {
+    var noChars = window.confirm("Please select at least one set of characters to include.")
 
-    // check to make sure at least one character set was selected
-    if (characterSet === "") {
-      var noChars = window.confirm("Please select at least one set of characters to include.")
-
-      // if ok, rerun character set selection
-      if (noChars) {
-        characterSelect();
-      } 
-      // if cancel, exit the function and alert user
-      else {
-        window.alert("Please try again when you are ready.");
-      };
+    // if ok, rerun character set selection
+    if (noChars) {
+      characterSelect();
+    } 
+    // if cancel, exit the function and alert user
+    else {
+      window.alert("Please try again when you are ready.");
     };
   };
+};
+
+// create function to generate a password based on the user input
+var generatePassword = function() {
+  // call function to collect the desired length
+  var characterLength = passwordLength();
 
   // call function to select characters
   characterSelect();
 
   // generate password with given values
   var passwordResult = ""
-  var characterLength = passwordLength();
   for (var i = 0; i < characterLength; i++) {
     passwordResult += characterSet.charAt(Math.floor(Math.random() * characterSet.length))
   };
@@ -66,6 +65,7 @@ var generatePassword = function() {
 
 // Collect password length through prompt
 var passwordLength = function() {
+  // prompt for user to enter length of password
   var characterNumber = window.prompt("How many characters would you like your password to contain?")
 
   // if the user cancels
