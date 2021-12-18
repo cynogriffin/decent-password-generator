@@ -6,6 +6,7 @@ var generatePassword = function() {
   // call function to collect the desired length
   passwordLength();
 
+  // function to collect the character sets the user wants to include in the password
   var characterSelect = function() {
     // confirm if user wants lowercase characters
     var lowercase = window.confirm("Click OK if you want to include lowercase characters.");
@@ -38,7 +39,7 @@ var generatePassword = function() {
     // check to make sure at least one character set was selected
     if (characterSet === "") {
       var noChars = window.confirm("Please select at least one set of characters to include.")
-      
+
       // if ok, rerun character set selection
       if (noChars) {
         characterSelect();
@@ -50,7 +51,17 @@ var generatePassword = function() {
     };
   };
 
+  // call function to select characters
   characterSelect();
+
+  // generate password with given values
+  var passwordResult = ""
+  var characterLength = passwordLength();
+  for (var i = 0; i < characterLength; i++) {
+    passwordResult += characterSet.charAt(Math.floor(Math.random() * characterSet.length))
+  };
+
+  return passwordResult;
 };
 
 // Collect password length through prompt
