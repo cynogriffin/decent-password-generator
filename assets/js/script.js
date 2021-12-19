@@ -52,6 +52,10 @@ var generatePassword = function() {
   
   // call function to collect the desired length
   var characterLength = passwordLength();
+  
+  if (!characterLength) {
+    return characterSet = "";
+  }
 
   // call function to select characters
   characterSelect();
@@ -73,6 +77,7 @@ var passwordLength = function() {
   // if the user cancels
   if (!characterNumber) {
     window.alert("Please try again when you are ready.");
+    return false;
   }
   // check if entry is not a number
   else if (isNaN(characterNumber)) {
